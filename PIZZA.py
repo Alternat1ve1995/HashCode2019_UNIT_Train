@@ -23,7 +23,10 @@ def read_file(fname):
     task = Task(inp[0], inp[1], inp[2], inp[3], data[1:])
     return task
 
-task = read_file('a_example.in')
-task.max_cells = 4
-shapes = get_possible_shapes(task)
+def get_input(filename):
+    task = read_file(filename)
+    task.max_cells = 4
+    shapes = get_possible_shapes(task)
+    return shapes, task
+
 print()
