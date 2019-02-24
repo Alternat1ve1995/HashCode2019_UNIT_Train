@@ -41,10 +41,12 @@ def walk_pizza(task, pieces):
 
 def razpanah(task, v, pieces):
     global ans
+    # for pie_coord in range(len(ans.all) - 1, -1, -1):
     for pie_coord in range(len(ans.all)):
+        br = False
         pie = ans.all[pie_coord]
         for big_pie in pieces[::-1]:
-            if (big_pie[0] + 1) * (big_pie[1] + 1) > (pie.xe + 1) * (pie.ye + 1):
+            if (big_pie[0] + 1) * (big_pie[1] + 1) > (pie.xe - pie.xs + 1) * (pie.ye - pie.ys + 1):
                 pie_n = v[pie.xs][pie.ys]
                 st_poi = [pie.xs - big_pie[0], pie.ys - big_pie[1]]
                 for i in range(big_pie[0] + 1):
@@ -55,6 +57,14 @@ def razpanah(task, v, pieces):
                             for k in range(big_pie[0] + 1):
                                 for l in range(big_pie[1] + 1):
                                     v[st_poi[0] + i + k][st_poi[1] + j + l] = pie_n
+                            br = True
+                        if br:
+                            break
+                    if br:
+                        break
+            if br:
+                break
+    print(len(v[v == 0]), task.rows * task.columns, len(v[v == 0]) / (task.rows * task.columns))
 
 
 def go_all():
@@ -75,4 +85,13 @@ def main(file):
     print("DONE", file)
 
 go_all()
-# main('c_medium.in')
+# main('a_example.in')
+
+# 0 15 0.0
+# DONE a_example.in
+# 2 42 0.047619047619047616
+# DONE b_small.in
+# 1072 50000 0.02144
+# DONE c_medium.in
+# 98135 1000000 0.098135
+# DONE d_big.in
